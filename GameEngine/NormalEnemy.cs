@@ -1,10 +1,9 @@
 ﻿using System;
 namespace GameEngine
 {
-    public class NormalEnemy
+    public class NormalEnemy : Enemy
     {
-        public NormalEnemy()
-        {
-        }
+        public override double TotalSpecialPower => 100;
+        public override double SpecialPowerUses => 2;
     }
 }

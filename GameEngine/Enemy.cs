@@ -1,10 +1,11 @@
 ﻿using System;
 namespace GameEngine
 {
-    public class Enemy
+    public abstract class Enemy
     {
-        public Enemy()
-        {
-        }
+        public string Name { get; set; }
+        public abstract double TotalSpecialPower { get; }
+        public abstract double SpecialPowerUses { get; }
+        public double SpecialAttackPower => TotalSpecialPower / SpecialPowerUses;
     }
 }
