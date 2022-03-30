@@ -2,7 +2,8 @@
 using Xunit;
 namespace GameEngine.Tests
 {
-    public class EnemyFactoryShould
+	[Trait("Category", "Enemy")]
+	public class EnemyFactoryShould
     {
 		[Fact]
 		public void CreateNormalEnemyByDefault()
@@ -12,6 +13,16 @@ namespace GameEngine.Tests
 			Enemy enemy = sut.Create("Zombie");
 
 			Assert.IsType<NormalEnemy>(enemy); // can also be run with *.IsNotType<DateTime>()
+		}
+
+		[Fact(Skip = "Don't need to run this")] // Attribute Skip is used to skip a test and provide a reason
+		public void CreateNormalEnemyByDefault_NotTypeExample()
+		{
+
+			EnemyFactory sut = new EnemyFactory();
+			Enemy enemy = sut.Create("Zombie");
+
+			Assert.IsNotType<DateTime>(enemy);
 		}
 
 		[Fact]
