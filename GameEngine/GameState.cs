@@ -29,6 +29,7 @@ namespace GameEngine
 
         private void CreateGameWorld()
         {
+            // Simulate expensive creation
             System.Threading.Thread.Sleep(2000);
         }
     }
