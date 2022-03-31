@@ -152,5 +152,72 @@ namespace GameEngine.Tests
 			() => _sut.TakeDamage(10)		//Action that should cause the PropertyChangedEvent to fire
 			);
 		}
-	}
+
+		/*
+		 ********************************************************************************************************************************** 
+		*/
+
+		// The following 4 tests show small amounts of damage being taken from the PlayerCharacter
+		// We will refactor them to Data-Driven tests to reduce code duplication.
+		// They will be kept for learning purposes
+		[Fact]
+		public void TakeZeroDamage()
+        {
+			_sut.TakeDamage(0);
+			Assert.Equal(100, _sut.Health);
+        }
+
+		[Fact]
+		public void TakeSmallDamage()
+		{
+			_sut.TakeDamage(1);
+			Assert.Equal(99, _sut.Health);
+		}
+
+		[Fact]
+		public void TakeMediumDamage()
+		{
+			_sut.TakeDamage(50);
+			Assert.Equal(50, _sut.Health);
+		}
+
+		[Fact]
+		public void HaveMinimum1Health()
+		{
+			_sut.TakeDamage(101);
+			Assert.Equal(1, _sut.Health);
+		}
+
+		// To create a Data-driven Test, we use Xunit's Theory attribute, which will tell that this test needs to be executed multiple times.
+		// In this case we insert "int damage" into the test as well as "int expectedHealth" to assert the final result.
+		// We use "[InlineData]" attribute, to specify the data being tested
+        // but it just belongs to this specific test, it cant be shared with other tests
+
+		[Theory]
+		[InlineData(0, 100)] // Parameters to replace the first of the 4 tests above
+		[InlineData(1, 99)]  // Parameters to replace the second of the 4 tests above
+		[InlineData(50, 50)] // Parameters to replace the third of the 4 tests above
+		[InlineData(101, 1)] // Parameters to replace the fourth of the 4 tests above
+		public void TakeDamage(int damage, int expectedHealth)
+		{
+			_sut.TakeDamage(damage);
+			Assert.Equal(expectedHealth, _sut.Health);
+		}
+
+		/*
+		 ********************************************************************************************************************************** 
+		*/
+
+		//Name of this test case was changed with _1 to prevent conflicts
+		// With the use of a custom attribute (HealthDamageDataAttribute), we can include our different scenarios
+        // with a simple property above our test, in this case [HealthDamageData]
+		[Theory]
+		[HealthDamageData]
+		public void TakeDamage_1(int damage, int expectedHealth)
+		{
+			_sut.TakeDamage(damage);
+			Assert.Equal(expectedHealth, _sut.Health);
+		}
+
+}
 }
