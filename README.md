@@ -1,4 +1,3 @@
-# xUnitTesting
-Testing .Net Code with xUnit.net
+# Testing .NET Code with xUnit.net 2: Getting Started
 
-Project created for the Pluralsight Testing .Net Code with xUnit.net videos.
+Course files and exercises of Testing .NET Code with xUnit.net 2: Getting Started course by Jason Roberts
